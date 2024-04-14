@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: const EdgeInsets.symmetric(
                   horizontal: 10.0,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.mic,
                   color: GlobalVariables.blackColor,
                   size: 25.0,

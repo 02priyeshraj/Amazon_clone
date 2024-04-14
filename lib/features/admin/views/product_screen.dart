@@ -1,4 +1,5 @@
 import 'package:amazon_clone/common/widgets/loader.dart';
+import 'package:amazon_clone/constants/global_var.dart';
 import 'package:amazon_clone/features/account/widgets/product.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:amazon_clone/features/admin/views/add_product_screen.dart';
@@ -84,6 +85,10 @@ class _ProductScreenState extends State<ProductScreen> {
               },
             ),
             floatingActionButton: FloatingActionButton(
+              backgroundColor: GlobalVariables.floatingActionButton,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              ),
               onPressed: navigateToAddProduct,
               tooltip: 'Add a Product',
               child: const Icon(Icons.add),
