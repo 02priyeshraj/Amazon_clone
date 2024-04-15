@@ -9,7 +9,7 @@ const adminRouter = require('./routes/admin');
 //INIT
 const PORT = 3000;
 const app = express();
-const DB = "mongodb+srv://Priyesh02:MANIT%402026@cluster0.zx5jtzi.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb+srv://<user_name>:<your_password>@cluster0.zx5jtzi.mongodb.net/?retryWrites=true&w=majority";
 
 //MIDDLEWARE
 app.use(express.json());
