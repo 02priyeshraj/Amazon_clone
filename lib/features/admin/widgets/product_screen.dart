@@ -2,7 +2,7 @@ import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_var.dart';
 import 'package:amazon_clone/features/account/widgets/product.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
-import 'package:amazon_clone/features/admin/views/add_product_screen.dart';
+import 'package:amazon_clone/features/admin/widgets/add_product_screen.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +65,9 @@ class _ProductScreenState extends State<ProductScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        const SizedBox(
+                          width: 8.0,
+                        ),
                         Expanded(
                           child: Text(
                             productData.name,

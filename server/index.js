@@ -5,21 +5,27 @@ const mongoose = require('mongoose');
 //IMPORT FROM OTHER FILES
 const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
+const productRouter = require('./routes/products');
+const userRouter = require('./routes/user');
 
 //INIT
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
-const DB = "mongodb+srv://<user_name>:<your_password>@cluster0.zx5jtzi.mongodb.net/?retryWrites=true&w=majority";
+
+//Enter MongoDB Users and password 
+const DB = "mongodb+srv://<User>:<MongoDB_password>@cluster0.zx5jtzi.mongodb.net/?retryWrites=true&w=majority";
 
 //MIDDLEWARE
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
+app.use(userRouter);
 
 
 //CONNECTIONS
 mongoose.connect(DB).then(()=>{
-    console.log("Connections  Succesful");
+    console.log("Connections  Successful");
 }).catch(e =>{
     console.log(e);
 });

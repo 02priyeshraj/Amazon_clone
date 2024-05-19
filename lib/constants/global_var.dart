@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-String uri = 'http://192.168.24.9:3000';
+//Enter your IP Address
+String uri = 'http://<your_IP_Address>:3000';
 
 class GlobalVariables {
   // COLORS
@@ -23,13 +24,16 @@ class GlobalVariables {
   static const backgroundColor = Colors.white;
   static const Color greyBackgroundColor = Color(0xffebecee);
   static var selectedNavBarColor = Colors.cyan[800]!;
-  static var floatingActionButton = Color.fromARGB(255, 3, 180, 196);
+  static const floatingActionButton = Color.fromARGB(255, 3, 180, 196);
   static const unselectedNavBarColor = Colors.black87;
   static const blackColor = Colors.black;
   static const boxColor = Colors.black12;
   static const borderColor = Colors.black38;
   static const transparent = Colors.transparent;
   static var greyColor = Colors.grey.shade400;
+  static const tealColor = Colors.teal;
+  static const priceColor = Colors.red;
+  static const yellowColor = Color.fromRGBO(254, 216, 19, 1);
 
   // STATIC IMAGES
   static const List<String> carouselImages = [

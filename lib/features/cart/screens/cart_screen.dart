@@ -1,20 +1,22 @@
+import 'package:amazon_clone/common/widgets/custom_Button.dart';
 import 'package:amazon_clone/constants/global_var.dart';
 import 'package:amazon_clone/features/Home/widgets/Address_box.dart';
-import 'package:amazon_clone/features/Home/widgets/carousel_image.dart';
-import 'package:amazon_clone/features/Home/widgets/categories.dart';
-import 'package:amazon_clone/features/Home/widgets/deal_of_the_day.dart';
+import 'package:amazon_clone/features/address/screens/address_screen.dart';
+import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
+import 'package:amazon_clone/features/cart/widgets/cart_subtotal.dart';
 import 'package:amazon_clone/features/search/screen/search_screen.dart';
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home';
-  const HomeScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CartScreenState extends State<CartScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(
       context,
@@ -23,8 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void navigateToAddressScreen(int sum) {
+    Navigator.pushNamed(
+      context,
+      AddressScreen.routeName,
+      arguments: sum.toString(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
+    int sum = 0;
+    user.cart
+        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .toList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
@@ -105,19 +120,38 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            AddressBox(),
-            SizedBox(
-              height: 10.0,
+            const AddressBox(),
+            const CartSubtotal(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomButton(
+                text: 'Proceed to Buy (${user.cart.length})',
+                onTap: () => navigateToAddressScreen(sum),
+                backgroundColor: GlobalVariables.yellowColor,
+                textColor: GlobalVariables.blackColor,
+              ),
             ),
-            Categories(),
-            SizedBox(
-              height: 10.0,
+            const SizedBox(
+              height: 15.0,
             ),
-            CarouselImage(),
-            DealOfTheDay(),
+            Container(
+              color: GlobalVariables.boxColor.withOpacity(0.08),
+              height: 1.0,
+            ),
+            const SizedBox(
+              height: 5.0,
+            ),
+            ListView.builder(
+              itemCount: user.cart.length,
+              itemBuilder: (context, index) {
+                return CartProduct(index: index);
+              },
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+            ),
           ],
         ),
       ),

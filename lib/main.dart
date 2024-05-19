@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Amazon Clone',
         theme: ThemeData(
+          useMaterial3: true,
           scaffoldBackgroundColor: GlobalVariables.backgroundColor,
           colorScheme: const ColorScheme.light(
             primary: GlobalVariables.secondaryColor,
@@ -56,8 +57,8 @@ class _MyAppState extends State<MyApp> {
         onGenerateRoute: (settings) => generateRoute(settings),
         home: Provider.of<UserProvider>(context).user.token.isNotEmpty
             ? Provider.of<UserProvider>(context).user.type == 'user'
-                ? BottomBar()
-                : AdminScreen()
+                ? const BottomBar()
+                : const AdminScreen()
             : const AuthScreen());
   }
 }
